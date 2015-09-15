@@ -11,7 +11,6 @@ import android.view.View;
 
 public class ScalingActivity extends Activity {
 
-
     private final int ANIMATION_INTERVAL_MS = 600;
     private final int ANIMATION_DURATION_MS = 700;
     private final int ANIMATION_DELAY_MS = 400;

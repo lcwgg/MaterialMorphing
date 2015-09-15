@@ -16,8 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MorphingActivity"/>
         <activity android:name=".ScalingActivity"/>
+        <activity android:name=".MorphingActivity"/>
+        <activity android:name=".MovingActivity"/>
     </application>
 
 </manifest>

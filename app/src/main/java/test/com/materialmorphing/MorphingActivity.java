@@ -14,19 +14,19 @@ import android.view.animation.PathInterpolator;
  */
 public class MorphingActivity extends Activity {
 
-    final int ANIMATION_INTERVAL_MS = 600;
-    final int ANIMATION_DURATION_MS = 700;
+    private final int ANIMATION_INTERVAL_MS = 600;
+    private final int ANIMATION_DURATION_MS = 700;
 
     private CardView mCardView;
 
-    int origSize;
-    int origRadius;
-    int targetRadius1;
-    int targetRadius2;
-    int targetRadius3;
+    int mOrigSize;
+    int mOrigRadius;
+    int mTargetRadius1;
+    int mTargetRadius2;
+    int mTargetRadius3;
 
-    int targetSize1;
-    int targetSize2;
+    int mTargetSize1;
+    int mTargetSize2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +34,15 @@ public class MorphingActivity extends Activity {
         setContentView(R.layout.activity_morphing);
         mCardView = (CardView) findViewById(R.id.card);
 
-        origSize = getResources().getDimensionPixelSize(R.dimen.morphing_original_size);
-        origRadius = getResources().getDimensionPixelSize(R.dimen.morphing_original_radius);
+        mOrigSize = getResources().getDimensionPixelSize(R.dimen.morphing_original_size);
+        mOrigRadius = getResources().getDimensionPixelSize(R.dimen.morphing_original_radius);
 
-        targetSize1 = origSize * 2;
-        targetSize2 = origSize * 4;
+        mTargetSize1 = mOrigSize * 2;
+        mTargetSize2 = mOrigSize * 4;
 
-        targetRadius1 = getResources().getDimensionPixelSize(R.dimen.morphing_target_radius_1);
-        targetRadius2 = origRadius * 4;
-        targetRadius3 = getResources().getDimensionPixelSize(R.dimen.morphing_target_radius_2);
+        mTargetRadius1 = getResources().getDimensionPixelSize(R.dimen.morphing_target_radius_1);
+        mTargetRadius2 = mOrigRadius * 4;
+        mTargetRadius3 = getResources().getDimensionPixelSize(R.dimen.morphing_target_radius_2);
 
 
         mCardView.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +61,7 @@ public class MorphingActivity extends Activity {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 // Redraw the cardview on each update
-                transformMaterial(origSize, targetSize1, origSize, targetSize1, origRadius, targetRadius1, animation);
+                transformMaterial(mOrigSize, mTargetSize1, mOrigSize, mTargetSize1, mOrigRadius, mTargetRadius1, animation);
             }
         });
 
@@ -72,7 +72,7 @@ public class MorphingActivity extends Activity {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 // Redraw the cardview on each update
-                transformMaterial(targetSize1, targetSize2, targetSize1, targetSize2, targetRadius1, targetRadius2, animation);
+                transformMaterial(mTargetSize1, mTargetSize2, mTargetSize1, mTargetSize2, mTargetRadius1, mTargetRadius2, animation);
             }
         });
 
@@ -83,7 +83,7 @@ public class MorphingActivity extends Activity {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 // Redraw the cardview on each update
-                transformMaterial(targetSize2, targetSize1, targetSize2, origSize, targetRadius2, targetRadius3, animation);
+                transformMaterial(mTargetSize2, mTargetSize1, mTargetSize2, mOrigSize, mTargetRadius2, mTargetRadius3, animation);
             }
         });
 
@@ -94,7 +94,7 @@ public class MorphingActivity extends Activity {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 // Redraw the cardview on each update
-                transformMaterial(targetSize1, origSize, origSize, origSize, targetRadius3, origRadius, animation);
+                transformMaterial(mTargetSize1, mOrigSize, mOrigSize, mOrigSize, mTargetRadius3, mOrigRadius, animation);
             }
         });
 

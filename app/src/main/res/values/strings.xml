@@ -2,4 +2,6 @@
     <string name="app_name">MaterialMorphing</string>
     <string name="scale">Scale</string>
     <string name="morph">Morph</string>
+    <string name="move">Move</string>
+    <string name="start">Start</string>
 </resources>

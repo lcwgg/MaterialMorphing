@@ -11,28 +11,33 @@ import android.widget.Button;
  */
 public class HomeActivity extends Activity {
 
-    private Button mScaleButton;
-    private Button mMorphButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mScaleButton = (Button) findViewById(R.id.scale);
-        mMorphButton = (Button) findViewById(R.id.morph);
+        final Button scaleButton = (Button) findViewById(R.id.scale);
+        final Button morphButton = (Button) findViewById(R.id.morph);
+        final Button moveButton = (Button) findViewById(R.id.move);
 
-        mScaleButton.setOnClickListener(new View.OnClickListener() {
+        scaleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, ScalingActivity.class));
             }
         });
 
-        mMorphButton.setOnClickListener(new View.OnClickListener() {
+        morphButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, MorphingActivity.class));
+            }
+        });
+
+        moveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, MovingActivity.class));
             }
         });
     }
