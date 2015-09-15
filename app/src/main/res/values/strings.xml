@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MaterialMorphing</string>
-    <string name="action_scale">Scale</string>
+    <string name="scale">Scale</string>
+    <string name="morph">Morph</string>
 </resources>

@@ -44,7 +44,7 @@ Here is an example
 
 ![Demo](images/materialmorphing.gif)
 
-As you can see, when scaling to the big square, first the width is scaled then the height. It follows Google recommendations, when morphing a piece of the UI, to avoid confusing the morphing with a piece moving on the z axis, it's better to scale the x and y axis with different offsets. However, on this set of animation specifically, It's not possible to apply this effect on the scaling back to original size. I tried applying different offset but for the last transformation it seems that the offset is not interpreted correclty, Android is just resizing the width then the height sequentially while the height should start resizing a little after the width started resizing (so part of the animations happen at the same time).
+As you can see, when scaling to the big square, first the width is scaled then the height. It follows Google recommendations, when morphing a piece of the UI, to avoid confusing the morphing with a piece moving on the z axis, it's better to scale the x and y axis with different offsets. However, on this set of animation specifically, It's not possible to apply this effect on the scaling back to original size. I tried applying different offsets but for the last transformation, it seems that the offset is not interpreted correclty, Android is just resizing the width then the height sequentially while the height should start resizing a little after the width started resizing (so x and y animation happen partially at the same time).
 
 This animation can be declined in many different ways, here is the same animation but we fix the top left corner so that it won't move during the animation
 
@@ -69,3 +69,42 @@ In this example, I overrode the PathInterpolator:
                   android:controlY1="0.75"
                   android:controlY2="1"/>
 ```
+
+## Morphing shapes
+One way to create morphing animations is using the ValueAnimator object and listen to animation updates. For each update, we can calculate the next state of the view and update it accordingly.
+Here is an example to morph a circle into a square : 
+```java
+// From circle to small square
+ValueAnimator toSmallSquare = ObjectAnimator.ofFloat(1, 0); // A set of values that the animation will animate between over time.
+toSmallSquare.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+    @Override
+    public void onAnimationUpdate(ValueAnimator animation) {
+        // Redraw the cardview on each update
+
+         float fraction = (float) animation.getAnimatedValue();
+	// update the cardView rounded corners
+	mCardView.setRadius(interpolate(origRadius, targetRadius, fraction));
+
+	// update cardview size
+	if (origWidth != targetWidth) {
+	    mCardView.getLayoutParams().width = (int) ((targetWidth - origWidth) * (1 - fraction) + origWidth);
+	}
+	if (origHeight != targetHeight) {
+	    mCardView.getLayoutParams().height = (int) ((targetHeight - origHeight) * (1 - fraction) + origWidth);
+	}
+
+	// request the cardview to redraw
+	mCardView.requestLayout();
+    }
+});
+
+private float interpolate(int from, int to, float fraction) {
+	return ((from - to) * fraction) + to;
+}
+```
+
+![Demo](images/materialmorphingcircle.gif)
+
+It is also possible to have an animation with a fix point that won't move during the animation. To achieve it, we'll need to fix the cardview position in xml using the margin.
+
+![Demo](images/materialmorphingcirclefixed.gif)

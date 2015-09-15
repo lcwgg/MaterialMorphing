@@ -3,5 +3,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="morphing_original_size">56dp</dimen>
+    <dimen name="morphing_original_radius">28dp</dimen>
+    <dimen name="morphing_target_radius_1">8dp</dimen>
+    <dimen name="morphing_target_radius_2">4dp</dimen>
+
     <dimen name="change_shape_original_size">100dp</dimen>
 </resources>
